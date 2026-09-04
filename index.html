@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VexorUX — Bespoke websites, high-performance web applications, and digital experiences engineered for growth and clarity by Divyanshu Yadav." />
+  <meta name="theme-color" content="#06070a" />
+  <meta name="author" content="Divyanshu Yadav" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VexorUX — Digital Products Engineered for Impact" />
+  <meta property="og:description" content="Premium web design and full-stack engineering by Divyanshu Yadav. Fast, clear, and high-converting." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" />
+  <meta property="twitter:card" content="summary_large_image" />
+
+  <title>VexorUX — Digital Products & Creative Engineering</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- External Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Three.js CDN Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+  <!-- Scroll Progress Indicator -->
+  <div id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- FIXED NAVIGATION -->
+  <div class="nav-container">
+    <nav id="mainNav" class="new-nav">
+      <a href="#home" class="brand" aria-label="VexorUX Homepage">
+        <div class="brand-logo">V</div>
+        <span>VexorUX</span>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#estimator" class="nav-link">Cost Calculator</a></li>
+        <li><a href="#work" class="nav-link">Selected Work</a></li>
+        <li><a href="#process" class="nav-link">Process</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="cmd-badge-btn" onclick="openCmdPalette()" title="Press Ctrl+K">⌘K Quick Actions</button>
+        <button class="btn btn-primary nav-cta-btn" onclick="openBookingModal()">Start a Project</button>
+      </div>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">☰</button>
+    </nav>
+  </div>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="home">
+      <div class="container hero-grid">
+        
+        <!-- Left: Copy & Value Proposition -->
+        <div class="hero-content reveal">
+          <div class="pill-badge">
+            <span class="live-pulse"></span>
+            Available for Q3/Q4 Projects
+          </div>
+
+          <h1>
+            Digital products<br>
+            engineered for<br>
+            <span class="text-gradient">measurable impact.</span>
+          </h1>
+
+          <p class="hero-desc">
+            VexorUX designs and builds high-performance web applications, bespoke business platforms, and immersive interactive interfaces for founders and brands that value clarity over clutter.
+          </p>
+
+          <div class="hero-cta-group">
+            <button class="btn btn-primary btn-glow" onclick="openBookingModal()">
+              Start a Project <span>→</span>
+            </button>
+            <a href="#estimator" class="btn btn-secondary">
+              Calculate Project Cost ⚡
+            </a>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="stat-item">
+              <strong>99.9%</strong>
+              <span>Uptime & Speed</span>
+            </div>
+            <div class="stat-item">
+              <strong>100%</strong>
+              <span>Custom Code</span>
+            </div>
+            <div class="stat-item">
+              <strong>&lt;0.5s</strong>
+              <span>Target Load Time</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 3D Stage Centerpiece -->
+        <div class="hero-3d-stage reveal" id="heroStage">
+          <!-- WebGL Canvas -->
+          <canvas id="heroCanvas" aria-label="Interactive 3D Quantum Gyro Core model"></canvas>
+          
+          <div class="stage-pill">
+            <span class="dot"></span>
+            <span>QUANTUM GYRO CORE // DRAG TO ROTATE</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <section class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <div class="trust-item-icon">⚡</div>
+          <div class="trust-item-text">
+            <strong>Sub-Second Speed</strong>
+            <span>Optimized Core Web Vitals</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-item-icon">📐</div>
+          <div class="trust-item-text">
+            <strong>Architecture First</strong>
+            <span>Clean, scalable codebases</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-item-icon">🛡️</div>
+          <div class="trust-item-text">
+            <strong>Production Grade</strong>
+            <span>Responsive & secure by default</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-item-icon">🎯</div>
+          <div class="trust-item-text">
+            <strong>Conversion Driven</strong>
+            <span>UX aligned to business goals</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES (SPOTLIGHT BENTO GRID) -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="kicker">Capabilities</div>
+            <h2 class="section-title">Engineered for growth.<br>Designed for clarity.</h2>
+          </div>
+          <p class="section-subtitle">
+            Every feature and interaction is purpose-built to solve tangible problems, establish trust, and turn visitors into long-term clients.
+          </p>
+        </div>
+
+        <div class="spotlight-grid">
+          
+          <div class="spotlight-card reveal">
+            <div class="spotlight-header">
+              <div class="spotlight-icon">🌐</div>
+              <span class="spotlight-num">01 // CORE</span>
+            </div>
+            <div class="spotlight-body">
+              <h3>Bespoke Web Platforms</h3>
+              <p>Custom-built corporate and marketing sites with high-impact visuals, zero bloat, and top-tier SEO performance.</p>
+            </div>
+            <div class="spotlight-tags">
+              <span class="tag-pill">HTML5/CSS3</span>
+              <span class="tag-pill">React</span>
+              <span class="tag-pill">SEO Arch</span>
+            </div>
+          </div>
+
+          <div class="spotlight-card reveal">
+            <div class="spotlight-header">
+              <div class="spotlight-icon">⚙️</div>
+              <span class="spotlight-num">02 // APP</span>
+            </div>
+            <div class="spotlight-body">
+              <h3>Web Applications & SaaS</h3>
+              <p>Full-stack dashboard applications, portals, and workflow engines equipped with state management and secure APIs.</p>
+            </div>
+            <div class="spotlight-tags">
+              <span class="tag-pill">Node.js</span>
+              <span class="tag-pill">Express</span>
+              <span class="tag-pill">REST APIs</span>
+              <span class="tag-pill">MongoDB</span>
+            </div>
+          </div>
+
+          <div class="spotlight-card reveal">
+            <div class="spotlight-header">
+              <div class="spotlight-icon">🎨</div>
+              <span class="spotlight-num">03 // UX</span>
+            </div>
+            <div class="spotlight-body">
+              <h3>UI/UX Design Systems</h3>
+              <p>Figma component libraries, user journey mapping, and conversion-optimized wireframes designed for seamless handover.</p>
+            </div>
+            <div class="spotlight-tags">
+              <span class="tag-pill">Figma</span>
+              <span class="tag-pill">Design Tokens</span>
+              <span class="tag-pill">Prototypes</span>
+            </div>
+          </div>
+
+          <div class="spotlight-card reveal">
+            <div class="spotlight-header">
+              <div class="spotlight-icon">✨</div>
+              <span class="spotlight-num">04 // 3D</span>
+            </div>
+            <div class="spotlight-body">
+              <h3>3D & Creative Engineering</h3>
+              <p>Interactive WebGL scenes, particle physics, and smooth micro-interactions that elevate brand positioning.</p>
+            </div>
+            <div class="spotlight-tags">
+              <span class="tag-pill">Three.js</span>
+              <span class="tag-pill">WebGL</span>
+              <span class="tag-pill">Canvas Shaders</span>
+            </div>
+          </div>
+
+          <div class="spotlight-card reveal">
+            <div class="spotlight-header">
+              <div class="spotlight-icon">🛍️</div>
+              <span class="spotlight-num">05 // COMMERCE</span>
+            </div>
+            <div class="spotlight-body">
+              <h3>High-End E-Commerce</h3>
+              <p>Tailored checkout funnels, inventory integrations, and frictionless payment gateways designed for speed.</p>
+            </div>
+            <div class="spotlight-tags">
+              <span class="tag-pill">Stripe / Razorpay</span>
+              <span class="tag-pill">Cart State</span>
+              <span class="tag-pill">Security</span>
+            </div>
+          </div>
+
+          <div class="spotlight-card reveal">
+            <div class="spotlight-header">
+              <div class="spotlight-icon">🚀</div>
+              <span class="spotlight-num">06 // EVOLVE</span>
+            </div>
+            <div class="spotlight-body">
+              <h3>Audits & Optimization</h3>
+              <p>Refactoring legacy code, optimizing Core Web Vitals, and implementing ongoing performance enhancements.</p>
+            </div>
+            <div class="spotlight-tags">
+              <span class="tag-pill">Lighthouse 100</span>
+              <span class="tag-pill">Speed Audits</span>
+              <span class="tag-pill">Refactoring</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SCOPE & COST ESTIMATOR -->
+    <section class="section" id="estimator" style="padding-top: 40px;">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="kicker">Scope Calculator</div>
+            <h2 class="section-title">Instant estimate.<br>Zero guesswork.</h2>
+          </div>
+          <p class="section-subtitle">
+            Configure your technical requirements to generate an immediate estimated scope, budget range, and timeline breakdown.
+          </p>
+        </div>
+
+        <div class="estimator-box reveal">
+          <div class="estimator-grid">
+            
+            <!-- Left: Deliverables Selection -->
+            <div>
+              <h3 style="font-size: 1.2rem; margin-bottom: 18px; color: #fff;">Select Required Deliverables</h3>
+              <div class="estimator-options" id="estimatorOptions">
+                
+                <div class="calc-item checked" data-price="20000" data-days="10" data-name="Responsive Brand Platform">
+                  <div class="calc-checkbox"></div>
+                  <div class="calc-text">
+                    <strong>Bespoke Brand Website</strong>
+                    <span>Responsive UI + 4 to 6 pages</span>
+                  </div>
+                </div>
+
+                <div class="calc-item" data-price="25000" data-days="14" data-name="User Authentication & Portal">
+                  <div class="calc-checkbox"></div>
+                  <div class="calc-text">
+                    <strong>Auth & User Portal</strong>
+                    <span>JWT/Sessions, dashboard, roles</span>
+                  </div>
+                </div>
+
+                <div class="calc-item" data-price="18000" data-days="10" data-name="Database & REST API Engine">
+                  <div class="calc-checkbox"></div>
+                  <div class="calc-text">
+                    <strong>Database & Custom API</strong>
+                    <span>MongoDB/SQL schema & endpoints</span>
+                  </div>
+                </div>
+
+                <div class="calc-item" data-price="15000" data-days="7" data-name="Payment Gateway Integration">
+                  <div class="calc-checkbox"></div>
+                  <div class="calc-text">
+                    <strong>Payments & Checkout</strong>
+                    <span>Stripe / Razorpay webhooks</span>
+                  </div>
+                </div>
+
+                <div class="calc-item" data-price="18000" data-days="8" data-name="3D WebGL / Interactive Motion">
+                  <div class="calc-checkbox"></div>
+                  <div class="calc-text">
+                    <strong>3D WebGL Centerpiece</strong>
+                    <span>Interactive Three.js scene</span>
+                  </div>
+                </div>
+
+                <div class="calc-item" data-price="10000" data-days="4" data-name="SEO Architecture & Analytics">
+                  <div class="calc-checkbox"></div>
+                  <div class="calc-text">
+                    <strong>SEO & Performance Audit</strong>
+                    <span>Lighthouse 98+, OpenGraph tags</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Right: Real-Time Results & 1-Click Export -->
+            <div class="estimator-result-card">
+              <div class="calc-metric-row">
+                <span class="calc-label">Estimated Investment</span>
+                <div class="calc-val-large" id="estPrice">₹20,000</div>
+              </div>
+
+              <div class="calc-metric-row">
+                <span class="calc-label">Target Completion</span>
+                <div>
+                  <span class="calc-timeline-badge" id="estTime">⏱ ~1.5 to 2 Weeks</span>
+                </div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 30px;">
+                <button class="btn btn-primary btn-glow" id="btnExportWhatsApp" style="width: 100%;">
+                  Send Scope to WhatsApp ↗
+                </button>
+                <button class="btn btn-secondary" id="btnCopyScope" style="width: 100%;">
+                  Copy Scope Summary
+                </button>
+              </div>
+
+              <p style="font-size: 0.72rem; color: var(--text-tertiary); margin-top: 16px; line-height: 1.5;">
+                *Estimates are calculated transparently and confirmed during technical roadmap kickoff.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK SHOWCASE -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="kicker">Selected Work</div>
+            <h2 class="section-title">Case studies with<br>verifiable outcomes.</h2>
+          </div>
+          <p class="section-subtitle">
+            A curated selection of digital products architected and developed with precision.
+          </p>
+        </div>
+
+        <div class="work-grid">
+          
+          <div class="work-card reveal">
+            <div class="work-backdrop work-backdrop-1"></div>
+            <div class="work-content">
+              <span class="work-category">FinTech & SaaS Platform</span>
+              <h3 class="work-title">NovaMetrics — Enterprise Financial Telemetry</h3>
+              <p class="work-summary">
+                A high-throughput dashboard tracking global payment settlements with real-time WebSockets, sub-50ms chart updates, and granular permission controls.
+              </p>
+              <div class="work-metrics">
+                <span class="metric-pill">✓ 4.2x Faster Reporting</span>
+                <span class="metric-pill">✓ 99.98% Processing Accuracy</span>
+              </div>
+              <div class="spotlight-tags">
+                <span class="tag-pill">React</span>
+                <span class="tag-pill">Node.js</span>
+                <span class="tag-pill">Chart.js</span>
+                <span class="tag-pill">WebSockets</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            
+            <div class="work-card small reveal">
+              <div class="work-backdrop work-backdrop-2"></div>
+              <div class="work-content">
+                <span class="work-category">Creative Commerce</span>
+                <h3 class="work-title" style="font-size: 1.25rem;">AuraSpatial — 3D Hardware Studio</h3>
+                <p class="work-summary">
+                  Interactive 3D configurator with smooth camera panning and integrated Stripe checkout.
+                </p>
+                <div class="spotlight-tags">
+                  <span class="tag-pill">Three.js</span>
+                  <span class="tag-pill">GLTF</span>
+                  <span class="tag-pill">Next.js</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="work-card small reveal">
+              <div class="work-backdrop work-backdrop-3"></div>
+              <div class="work-content">
+                <span class="work-category">Enterprise AI Interface</span>
+                <h3 class="work-title" style="font-size: 1.25rem;">SynapseAI — Workflow Automation Engine</h3>
+                <p class="work-summary">
+                  Drag-and-drop node graph canvas for structuring multi-agent LLM workflows with instant testing.
+                </p>
+                <div class="spotlight-tags">
+                  <span class="tag-pill">TypeScript</span>
+                  <span class="tag-pill">Canvas API</span>
+                  <span class="tag-pill">Tailwind</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="kicker">Methodology</div>
+            <h2 class="section-title">The four-phase<br>execution protocol.</h2>
+          </div>
+          <p class="section-subtitle">
+            Transparent milestones, rapid iteration cycles, and direct communication from concept to deployment.
+          </p>
+        </div>
+
+        <div class="process-container reveal">
+          <div class="process-step">
+            <span class="process-step-num">PHASE // 01</span>
+            <h3>Discovery & Architecture</h3>
+            <p>We define core business objectives, map database requirements, outline technical scope, and establish clear delivery KPIs.</p>
+          </div>
+          <div class="process-step">
+            <span class="process-step-num">PHASE // 02</span>
+            <h3>UI/UX & Interactive Prototyping</h3>
+            <p>Creation of responsive design systems, high-fidelity interactive wireframes, and design approvals prior to coding.</p>
+          </div>
+          <div class="process-step">
+            <span class="process-step-num">PHASE // 03</span>
+            <h3>Full-Stack Engineering</h3>
+            <p>Writing clean, typed, modular code with accessible markup, seamless API integrations, and database connectivity.</p>
+          </div>
+          <div class="process-step">
+            <span class="process-step-num">PHASE // 04</span>
+            <h3>Deployment & Handover</h3>
+            <p>Rigorous cross-browser stress testing, Lighthouse audits, CI/CD pipeline setup, and thorough documentation handover.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          
+          <div class="about-card reveal">
+            <div class="kicker">About the Engineer</div>
+            <h2 class="section-title" style="font-size: 2.4rem;">Divyanshu<br>Yadav</h2>
+            <p>
+              I am a Computer Science student and full-stack software engineer specializing in building high-end web platforms and modern digital products.
+            </p>
+            <p>
+              VexorUX is my development studio focused on marrying robust engineering principles with sophisticated creative design. Whether architecting database models or crafting 60FPS WebGL graphics, every line of code is written with intent.
+            </p>
+
+            <div class="skills-cloud">
+              <span class="skill-chip">JavaScript (ES6+)</span>
+              <span class="skill-chip">TypeScript</span>
+              <span class="skill-chip">React.js</span>
+              <span class="skill-chip">Node.js</span>
+              <span class="skill-chip">Express</span>
+              <span class="skill-chip">MongoDB</span>
+              <span class="skill-chip">Three.js / WebGL</span>
+              <span class="skill-chip">Tailwind CSS</span>
+              <span class="skill-chip">Git / CI/CD</span>
+            </div>
+          </div>
+
+          <div class="about-card reveal">
+            <div class="quote-box">
+              <div>
+                <div class="kicker">Philosophy</div>
+                <h3 style="font-size: 1.8rem; margin-top: 10px;">Engineering clarity over unnecessary complexity.</h3>
+                <blockquote>
+                  "A product doesn't feel premium because it is packed with animations. It feels premium when every transition is intentional, every page load is instantaneous, and the user achieves their goal without friction."
+                </blockquote>
+              </div>
+
+              <div class="author-info">
+                <div class="author-avatar">DY</div>
+                <div>
+                  <strong style="display: block; font-size: 0.95rem;">Divyanshu Yadav</strong>
+                  <span style="font-size: 0.76rem; color: var(--text-tertiary);">Founder & Full-Stack Engineer // VexorUX</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="kicker">FAQ</div>
+            <h2 class="section-title">Frequently asked<br>questions.</h2>
+          </div>
+          <p class="section-subtitle">
+            Direct answers regarding project kickoff, engineering stack, timelines, and post-launch support.
+          </p>
+        </div>
+
+        <div class="faq-wrapper reveal">
+          
+          <details class="faq-item">
+            <summary>
+              <span>What is the typical turnaround timeline for a project?</span>
+              <span class="faq-icon">+</span>
+            </summary>
+            <p>
+              Standard marketing websites and brand platforms typically ship in 2 to 3 weeks. Comprehensive full-stack web applications with authentication, custom databases, and API integrations usually take between 4 to 8 weeks depending on scope complexity.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>Do you handle both the visual design and backend engineering?</span>
+              <span class="faq-icon">+</span>
+            </summary>
+            <p>
+              Yes. VexorUX offers a unified, single-point workflow from initial UX wireframing and design tokens in Figma through frontend code, backend API architecture (Node/Express), database schemas (MongoDB/SQL), and cloud deployment.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>Can you redesign or upgrade an existing live website?</span>
+              <span class="faq-icon">+</span>
+            </summary>
+            <p>
+              Absolutely. We can perform a comprehensive performance and UI audit on your current website, redesign the user experience, optimize Core Web Vitals, and migrate your stack to modern frameworks without data loss.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>How do payments and milestone schedules work?</span>
+              <span class="faq-icon">+</span>
+            </summary>
+            <p>
+              Projects are typically structured around transparent milestone billing: an initial deposit upon contract kickoff, a midpoint milestone following prototype approval, and the final balance upon successful deployment and code handover.
+            </p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="kicker">Initiate Project</div>
+            <h2 class="section-title">Ready to build?<br>Let's talk specs.</h2>
+          </div>
+          <p class="section-subtitle">
+            Share your project requirements, target timeline, and goals. I'll get back to you within 24 hours with an actionable roadmap.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          
+          <div class="contact-card-direct reveal">
+            <div>
+              <div class="kicker">Direct Reach</div>
+              <h3 style="font-size: 1.8rem; margin-top: 10px;">Direct channels for rapid response.</h3>
+              <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 14px; line-height: 1.7;">
+                Prefer direct messaging or have an urgent timeline? Connect with me directly on any of the verified channels below.
+              </p>
+
+              <div class="direct-channels">
+                <a href="mailto:hsy0561@gmail.com" class="channel-btn">
+                  <span>✉ Email — hsy0561@gmail.com</span>
+                  <span>↗</span>
+                </a>
+                <a href="https://wa.me/917222977455?text=Hi%20Divyanshu,%20I'd%20like%20to%20discuss%20a%20project%20with%20VexorUX" target="_blank" rel="noopener" class="channel-btn">
+                  <span>💬 WhatsApp — +91 72229 77455</span>
+                  <span>↗</span>
+                </a>
+                <a href="https://www.linkedin.com/in/divyanshu-yadav-4a9847416/" target="_blank" rel="noopener" class="channel-btn">
+                  <span>💼 LinkedIn — Divyanshu Yadav</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border);">
+              <span style="font-size: 0.75rem; color: var(--text-tertiary); font-family: var(--font-mono);">
+                LOCATED IN: INDIA // SERVING CLIENTS GLOBALLY
+              </span>
+            </div>
+          </div>
+
+          <div class="form-wrapper reveal">
+            <form id="directContactForm">
+              <div class="form-fields">
+                <div class="form-group">
+                  <label for="cName">Your Name</label>
+                  <input id="cName" name="name" required placeholder="e.g. Alex Morgan">
+                </div>
+                <div class="form-group">
+                  <label for="cEmail">Email Address</label>
+                  <input id="cEmail" name="email" type="email" required placeholder="alex@company.com">
+                </div>
+                <div class="form-group">
+                  <label for="cType">Project Category</label>
+                  <select id="cType" name="project_type">
+                    <option>Bespoke Business Website</option>
+                    <option>Web Application / SaaS</option>
+                    <option>E-Commerce Platform</option>
+                    <option>UI/UX Design System</option>
+                    <option>3D / Interactive WebGL</option>
+                    <option>Codebase Audit & Optimization</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="cBudget">Estimated Budget</label>
+                  <select id="cBudget" name="budget">
+                    <option>Flexible / Discuss Scope</option>
+                    <option>₹15,000 – ₹30,000</option>
+                    <option>₹30,000 – ₹60,000</option>
+                    <option>₹60,000 – ₹1,20,000</option>
+                    <option>₹1,20,000+</option>
+                  </select>
+                </div>
+                <div class="form-group full">
+                  <label for="cMessage">Project Scope & Deliverables</label>
+                  <textarea id="cMessage" name="message" required placeholder="Describe your product, core requirements, and target timeline..."></textarea>
+                </div>
+                <div class="form-group full">
+                  <button type="submit" class="btn btn-primary btn-glow" style="width: 100%;">
+                    Submit Inquiry Request <span>→</span>
+                  </button>
+                </div>
+              </div>
+              <div class="form-status" id="contactStatus">
+                ✓ Inquiry captured successfully! We'll get back to you shortly.
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA BANNER -->
+    <section class="section" style="padding-top: 20px;">
+      <div class="container">
+        <div class="cta-banner reveal">
+          <div>
+            <div class="kicker">Ready when you are</div>
+            <h2>Let's build something<br><span class="text-gradient">remarkable together.</span></h2>
+            <p>Elevate your brand presence and engineering quality with a dedicated development partner.</p>
+          </div>
+          <button class="btn btn-primary btn-glow" onclick="openBookingModal()" style="padding: 16px 32px; font-size: 0.95rem;">
+            Book Consultation Call <span>→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-logo">V</div>
+            <span>VexorUX</span>
+          </div>
+          <p>
+            Bespoke websites, high-performance web applications, and creative engineering for modern ventures. Built with mathematical clarity and architectural intent.
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 60px; flex-wrap: wrap;">
+          <div class="footer-nav-col">
+            <span class="footer-nav-title">Navigation</span>
+            <a href="#services">Services</a>
+            <a href="#estimator">Cost Calculator</a>
+            <a href="#work">Selected Work</a>
+            <a href="#process">Process</a>
+            <a href="#about">About</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div class="footer-nav-col">
+            <span class="footer-nav-title">Connect</span>
+            <a href="mailto:hsy0561@gmail.com">Email</a>
+            <a href="https://wa.me/917222977455" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="https://www.linkedin.com/in/divyanshu-yadav-4a9847416/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 VexorUX. All rights reserved. Designed & Engineered by Divyanshu Yadav.</span>
+        <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--primary);">
+          LATENCY: 0.02s // GPU THROTTLE: OPTIMAL
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING QUICK ACTIONS DOCK -->
+  <div class="floating-dock">
+    <button class="dock-btn" onclick="openCmdPalette()" title="Quick Command Palette (Ctrl+K)">⌘</button>
+    <a href="https://wa.me/917222977455?text=Hi%20Divyanshu,%20I'd%20like%20to%20discuss%20a%20project%20with%20VexorUX" target="_blank" rel="noopener" class="dock-btn" title="Chat on WhatsApp">💬</a>
+    <button class="dock-btn" onclick="copyText('hsy0561@gmail.com', 'Email copied to clipboard!')" title="Copy Email">✉</button>
+    <button class="dock-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Back to Top">↑</button>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast">
+    <span id="toastMsg">Action executed!</span>
+  </div>
+
+  <!-- COMMAND PALETTE (CTRL+K) -->
+  <div class="cmd-palette-backdrop" id="cmdPalette" role="dialog" aria-modal="true" aria-label="Command Palette">
+    <div class="cmd-palette-card">
+      <div class="cmd-input-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="cmd-input" id="cmdInput" placeholder="Type a command or jump to section..." autocomplete="off">
+      </div>
+      <div class="cmd-list" id="cmdList">
+        <div class="cmd-item" onclick="navigateSection('#estimator')">
+          <div class="cmd-item-left">
+            <span>⚡</span>
+            <span>Calculate Project Scope & Cost</span>
+          </div>
+          <span class="cmd-item-tag">Tool</span>
+        </div>
+        <div class="cmd-item" onclick="openBookingModal(); closeCmdPalette();">
+          <div class="cmd-item-left">
+            <span>💼</span>
+            <span>Start a New Project Brief</span>
+          </div>
+          <span class="cmd-item-tag">Action</span>
+        </div>
+        <div class="cmd-item" onclick="copyText('hsy0561@gmail.com', 'Email copied: hsy0561@gmail.com'); closeCmdPalette();">
+          <div class="cmd-item-left">
+            <span>✉</span>
+            <span>Copy Direct Email Address</span>
+          </div>
+          <span class="cmd-item-tag">Copy</span>
+        </div>
+        <div class="cmd-item" onclick="window.open('https://wa.me/917222977455', '_blank'); closeCmdPalette();">
+          <div class="cmd-item-left">
+            <span>💬</span>
+            <span>Open Instant WhatsApp Chat</span>
+          </div>
+          <span class="cmd-item-tag">Link</span>
+        </div>
+        <div class="cmd-item" onclick="navigateSection('#services')">
+          <div class="cmd-item-left">
+            <span>🛠</span>
+            <span>Jump to Services & Capabilities</span>
+          </div>
+          <span class="cmd-item-tag">Section</span>
+        </div>
+        <div class="cmd-item" onclick="navigateSection('#work')">
+          <div class="cmd-item-left">
+            <span>📂</span>
+            <span>Jump to Selected Case Studies</span>
+          </div>
+          <span class="cmd-item-tag">Section</span>
+        </div>
+        <div class="cmd-item" onclick="navigateSection('#contact')">
+          <div class="cmd-item-left">
+            <span>📬</span>
+            <span>Jump to Direct Contact Form</span>
+          </div>
+          <span class="cmd-item-tag">Section</span>
+        </div>
+      </div>
+      <div class="cmd-footer">
+        <span>Navigation: [↑] [↓] to select, [↵] to execute</span>
+        <span>[ESC] to close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING & PROJECT MODAL -->
+  <div class="modal-backdrop" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeBookingModal()" aria-label="Close modal">✕</button>
+      
+      <div class="kicker">Direct Scope Inquiry</div>
+      <h2 id="modalTitle" style="font-size: 1.8rem; margin-bottom: 8px;">Let's build your product.</h2>
+      <p style="color: var(--text-secondary); font-size: 0.84rem; line-height: 1.6; margin-bottom: 24px;">
+        Fill in the details below to receive a scoped timeline and technical roadmap.
+      </p>
+
+      <form id="modalBookingForm">
+        <div class="form-fields">
+          <div class="form-group">
+            <label for="mName">Full Name</label>
+            <input id="mName" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="mEmail">Email Address</label>
+            <input id="mEmail" name="email" type="email" required placeholder="you@company.com">
+          </div>
+          <div class="form-group">
+            <label for="mCompany">Company / Venture (Optional)</label>
+            <input id="mCompany" name="company" placeholder="e.g. Acme Tech">
+          </div>
+          <div class="form-group">
+            <label for="mType">Service Needed</label>
+            <select id="mType" name="service">
+              <option>Bespoke Business Website</option>
+              <option>Web Application / SaaS</option>
+              <option>UI/UX Design System</option>
+              <option>3D WebGL Experience</option>
+              <option>E-Commerce Solution</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="mBudget">Budget Range</label>
+            <select id="mBudget" name="budget">
+              <option>Flexible / To be scoped</option>
+              <option>₹15,000 – ₹30,000</option>
+              <option>₹30,000 – ₹60,000</option>
+              <option>₹60,000 – ₹1,20,000</option>
+              <option>₹1,20,000+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="mTimeline">Target Launch</label>
+            <select id="mTimeline" name="timeline">
+              <option>Flexible</option>
+              <option>Immediate (&lt; 2 weeks)</option>
+              <option>1 Month</option>
+              <option>2+ Months</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="mDetails">Project Goals & Description</label>
+            <textarea id="mDetails" name="details" required placeholder="What are the core features and objectives of this build?"></textarea>
+          </div>
+          <div class="form-group full">
+            <button type="submit" class="btn btn-primary btn-glow" style="width: 100%;">
+              Send Project Brief <span>→</span>
+            </button>
+          </div>
+        </div>
+        <div class="form-status" id="modalStatus">
+          ✓ Project brief generated successfully! You can also reach out on WhatsApp for instant confirmation.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODULAR JAVASCRIPT FILES (CONNECTED EXTERNALLY) -->
+  <script src="js/threeScene.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

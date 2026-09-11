@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: sitemap.xml
+Sitemap: https://divyanshu-yadav-89.github.io/vexor-ux/sitemap.xml

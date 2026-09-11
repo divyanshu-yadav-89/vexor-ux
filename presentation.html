@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VexorUX — Project Presentation Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06070a;
+      --card-bg: rgba(18, 22, 34, 0.85);
+      --accent-cyan: #00f2ff;
+      --accent-purple: #9d4edd;
+      --text: #f0f3fa;
+      --text-muted: #8b95a5;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 25%, rgba(0, 242, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(157, 78, 221, 0.1) 0%, transparent 40%);
+    }
+    .deck-container {
+      width: 90vw;
+      max-width: 1000px;
+      height: 72vh;
+      min-height: 520px;
+      position: relative;
+      perspective: 1000px;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 50px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+    .slide.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .slide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 242, 255, 0.1);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 242, 255, 0.3);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: fit-content;
+      margin-bottom: 20px;
+    }
+    h1, h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    h1 {
+      font-size: 3.2rem;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 {
+      font-size: 2.3rem;
+      margin-bottom: 24px;
+      color: #ffffff;
+    }
+    p.lead {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 800px;
+      margin-bottom: 24px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      margin-top: 10px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 22px;
+      transition: border-color 0.2s;
+    }
+    .card:hover {
+      border-color: rgba(0, 242, 255, 0.4);
+    }
+    .card h3 {
+      font-size: 1.15rem;
+      color: var(--accent-cyan);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: #e0e5ed;
+    }
+    .tag.highlight {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+    .speaker-notes {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: rgba(157, 78, 221, 0.1);
+      border-left: 3px solid var(--accent-purple);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.92rem;
+      color: #d8b4f8;
+      line-height: 1.5;
+    }
+    .speaker-notes strong {
+      color: #fff;
+    }
+    /* Controls */
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 90vw;
+      max-width: 1000px;
+      margin-top: 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+    }
+    .btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: var(--accent-cyan);
+      color: #000;
+    }
+    .btn-primary {
+      background: var(--accent-cyan);
+      color: #000;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #70f7ff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+
+    <!-- SLIDE 1: TITLE -->
+    <div class="slide active">
+      <div class="slide-badge">Portfolio & Tech Showcase</div>
+      <h1>VexorUX</h1>
+      <p class="lead">Digital Products & Creative Engineering Platform</p>
+      <div style="margin-top: 20px;">
+        <p style="color: var(--text); font-weight: 600; font-size: 1.1rem;">Built & Maintained by Divyanshu Yadav</p>
+        <p style="color: var(--accent-cyan); margin-top: 6px; font-family: 'JetBrains Mono'; font-size: 0.95rem;">
+          🌐 https://divyanshu-yadav-89.github.io/vexor-ux/
+        </p>
+      </div>
+      <div class="speaker-notes">
+        💡 <strong>Quick pitch:</strong> "Hello everyone! Today I want to showcase VexorUX—a modern, full-stack digital experience platform engineered with interactive 3D WebGL visuals, real-time pricing estimation, and production-grade architecture."
+      </div>
+    </div>
+
+    <!-- SLIDE 2: THE PROBLEM -->
+    <div class="slide">
+      <div class="slide-badge">The Motivation</div>
+      <h2>The Challenge with Modern Websites</h2>
+      <p class="lead">Most agency and business websites suffer from 3 critical issues:</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>😴 Static & Generic</h3>
+          <p>Flat, static templates with zero visual excitement that fail to keep high-value visitors engaged.</p>
+        </div>
+        <div class="card">
+          <h3>❓ Opaque Pricing</h3>
+          <p>Visitors have to wait days for sales calls just to understand what a digital project will cost.</p>
+        </div>
+        <div class="card">
+          <h3>📉 Poor Conversion</h3>
+          <p>Boring lead forms with poor UX that lead to high bounce rates and lost client opportunities.</p>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        💡 <strong>What to say:</strong> "Most digital agency websites look the same—flat templates where visitors bounce in seconds, and clients never know pricing upfront. VexorUX was built to solve this."
+      </div>
+    </div>
+
+    <!-- SLIDE 3: THE SOLUTION -->
+    <div class="slide">
+      <div class="slide-badge">The Solution</div>
+      <h2>Enter VexorUX</h2>
+      <p class="lead">A cutting-edge platform combining immersive visuals with instant utility.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>⚡ Immersive 3D Experience</h3>
+          <p>Built-in interactive WebGL canvas that reacts smoothly to user mouse movement and device capabilities.</p>
+        </div>
+        <div class="card">
+          <h3>💰 Live Cost Calculator</h3>
+          <p>Clients configure project scope, timeline, and features to receive immediate, transparent cost estimates.</p>
+        </div>
+        <div class="card">
+          <h3>⌘ Quick Actions Palette (Ctrl+K)</h3>
+          <p>Power-user command dialog inspired by macOS Spotlight for instant keyboard navigation.</p>
+        </div>
+        <div class="card">
+          <h3>🛡️ End-to-End Inquiry Pipeline</h3>
+          <p>Validated booking modal connected directly to an Express & MongoDB backend.</p>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        💡 <strong>What to say:</strong> "VexorUX replaces boring pages with an interactive experience: Three.js 3D visuals, a transparent project cost calculator, and quick keyboard navigation."
+      </div>
+    </div>
+
+    <!-- SLIDE 4: TECH STACK -->
+    <div class="slide">
+      <div class="slide-badge">Architecture</div>
+      <h2>The Technology Stack</h2>
+      <p class="lead">Built with performance, modern standards, and clean modularity in mind.</p>
+      
+      <div class="grid-3">
+        <div class="card">
+          <h3>🎨 Frontend</h3>
+          <p>HTML5, Modern CSS3 variables, Glassmorphism, Vanilla JS (ES6+). Zero bloat, fast load times.</p>
+        </div>
+        <div class="card">
+          <h3>🎮 3D Graphics</h3>
+          <p><strong>Three.js</strong> running on WebGL with custom particle fields, wireframe mesh, and frame throttles.</p>
+        </div>
+        <div class="card">
+          <h3>⚙️ Backend & Database</h3>
+          <p><strong>Node.js + Express REST API</strong> backed by <strong>MongoDB</strong> with schema validation via Mongoose.</p>
+        </div>
+      </div>
+
+      <div class="tag-list">
+        <span class="tag highlight">Three.js</span>
+        <span class="tag">JavaScript (ES6+)</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Express.js</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">Mongoose</span>
+        <span class="tag">CSS Glassmorphism</span>
+      </div>
+      <div class="speaker-notes">
+        💡 <strong>What to say:</strong> "Instead of heavy bloated frameworks, the frontend is built lightweight with vanilla JavaScript and Three.js for 60fps performance, paired with an Express/MongoDB backend."
+      </div>
+    </div>
+
+    <!-- SLIDE 5: KEY FEATURES DEEP DIVE -->
+    <div class="slide">
+      <div class="slide-badge">Features</div>
+      <h2>Engineering Highlights</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>🎯 3D Scene with Adaptive FPS</h3>
+          <p>The Three.js scene dynamically monitors performance and gracefully optimizes rendering for mobile or low-power devices.</p>
+        </div>
+        <div class="card">
+          <h3>📊 Real-time Price Estimation</h3>
+          <p>Dynamic JavaScript calculator engine computing base cost, add-ons (animations, e-commerce, custom 3D), and timelines on the fly.</p>
+        </div>
+        <div class="card">
+          <h3>📋 Command Palette Navigation</h3>
+          <p>Accessible via <code>Ctrl+K</code> or <code>⌘K</code>, allowing visitors to jump to sections, open calculators, or contact instantly.</p>
+        </div>
+        <div class="card">
+          <h3>📨 Seamless Lead Capture</h3>
+          <p>Full inquiry schema tracking client name, email, project type, timeline, and estimated budget into MongoDB.</p>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        💡 <strong>What to say:</strong> "The 3D canvas is GPU-accelerated and adapts to device performance. The cost calculator gives clients real-time estimates, and Ctrl+K lets keyboard power-users navigate seamlessly."
+      </div>
+    </div>
+
+    <!-- SLIDE 6: DEPLOYMENT & GOOGLE SEO -->
+    <div class="slide">
+      <div class="slide-badge">Production</div>
+      <h2>Deployment & Google Indexing</h2>
+      <p class="lead">VexorUX is not just a local demo—it is live on production and verified with Google.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>🌐 Live Deployment</h3>
+          <p>Deployed on global edge CDN via <strong>GitHub Pages</strong> with instant global delivery and HTTPS.</p>
+        </div>
+        <div class="card">
+          <h3>🔍 Google Search Console</h3>
+          <p>Domain ownership verified with Google using HTML verification meta tags; priority crawl requested.</p>
+        </div>
+        <div class="card">
+          <h3>🤖 Crawling & Sitemap</h3>
+          <p>Configured with automated <strong>robots.txt</strong> and structured <strong>sitemap.xml</strong> for full search indexing.</p>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        💡 <strong>What to say:</strong> "The site is fully deployed with an SSL certificate on a global CDN. It is officially verified on Google Search Console with sitemaps and robots.txt ready for search discovery."
+      </div>
+    </div>
+
+    <!-- SLIDE 7: LIVE DEMO & SUMMARY -->
+    <div class="slide">
+      <div class="slide-badge">Conclusion</div>
+      <h2>Summary & Live Demo</h2>
+      <p class="lead">VexorUX demonstrates how creative engineering bridges the gap between aesthetics and business conversions.</p>
+      
+      <div class="card" style="margin-bottom: 20px;">
+        <h3 style="color: #fff;">🚀 Try the Live Website:</h3>
+        <p style="font-size: 1.1rem; color: var(--accent-cyan); font-family: 'JetBrains Mono'; margin-top: 6px;">
+          https://divyanshu-yadav-89.github.io/vexor-ux/
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>🧑‍💻 Developer</h3>
+          <p>Divyanshu Yadav — Full-Stack & Creative Engineer</p>
+        </div>
+        <div class="card">
+          <h3>💻 Source Code</h3>
+          <p>GitHub: github.com/divyanshu-yadav-89/vexor-ux</p>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        💡 <strong>Closing statement:</strong> "Thank you! I'd be happy to give a live walkthrough or answer any questions about the 3D graphics, backend architecture, or design system."
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONTROLS & NAVIGATION -->
+  <div class="controls">
+    <div>
+      <span id="slideIndicator">Slide 1 / 7</span> | Use <kbd style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">←</kbd> <kbd style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">→</kbd> arrows or buttons
+    </div>
+    <div class="btn-group">
+      <button class="btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+      <button class="btn" onclick="toggleFullScreen()">⛶ Fullscreen</button>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const indicator = document.getElementById('slideIndicator');
+
+    function showSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= slides.length) index = slides.length - 1;
+      currentSlide = index;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+      });
+
+      indicator.textContent = `Slide ${currentSlide + 1} / ${slides.length}`;
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').textContent = (currentSlide === slides.length - 1) ? 'Finish 🏁' : 'Next →';
+    }
+
+    function changeSlide(direction) {
+      showSlide(currentSlide + direction);
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        changeSlide(1);
+      } else if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullScreen();
+      }
+    });
+
+    showSlide(0);
+  </script>
+</body>
+</html>

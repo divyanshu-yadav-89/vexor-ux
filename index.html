@@ -24,8 +24,8 @@
   <!-- External Modular Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Three.js CDN Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Three.js CDN Library (SRI-pinned so a compromised CDN can't inject arbitrary script) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
@@ -34,7 +34,7 @@
 
   <!-- FIXED NAVIGATION -->
   <div class="nav-container">
-    <nav id="mainNav" class="new-nav">
+    <nav id="mainNav">
       <a href="#home" class="brand" aria-label="VexorUX Homepage">
         <div class="brand-logo">V</div>
         <span>VexorUX</span>
@@ -47,6 +47,7 @@
         <li><a href="#process" class="nav-link">Process</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#" class="nav-link mobile-only" onclick="openBookingModal(); return false;">Start a Project →</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -744,6 +745,7 @@
             <a href="mailto:hsy0561@gmail.com">Email</a>
             <a href="https://wa.me/917222977455" target="_blank" rel="noopener">WhatsApp</a>
             <a href="https://www.linkedin.com/in/divyanshu-yadav-4a9847416/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/divyanshu-yadav" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
       </div>
@@ -905,6 +907,11 @@
       </form>
     </div>
   </div>
+
+  <!-- API BASE CONFIG — point this at your deployed backend before going live -->
+  <script>
+    window.VEXOR_API_BASE = window.VEXOR_API_BASE || "http://localhost:5000";
+  </script>
 
   <!-- MODULAR JAVASCRIPT FILES (CONNECTED EXTERNALLY) -->
   <script src="js/threeScene.js" defer></script>

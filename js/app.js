@@ -225,8 +225,10 @@ if (modalBackdrop) {
   });
 }
 
-// 8. Unified Form Handling (Direct & Modal)
-function setupForm(formId, statusId) {
+// 8. Unified Form Handling (Direct & Modal) — submits real data to the backend
+const API_BASE = (window.VEXOR_API_BASE || "").replace(/\/$/, "");
+
+function setupForm(formId, statusId, source) {
   const form = document.getElementById(formId);
   const status = document.getElementById(statusId);
   if (!form) return;
@@ -236,25 +238,66 @@ function setupForm(formId, statusId) {
     const submitBtn = form.querySelector('button[type="submit"]');
     const origText = submitBtn ? submitBtn.innerHTML : "Submit";
     if (submitBtn) {
-      submitBtn.innerHTML = "Processing Brief...";
+      submitBtn.innerHTML = "Sending Brief...";
       submitBtn.disabled = true;
     }
+    if (status) status.classList.remove("active", "error");
 
-    setTimeout(() => {
-      if (status) status.classList.add("active");
-      if (submitBtn) submitBtn.innerHTML = "Brief Ready ✓";
-      showToast("Project request captured successfully!");
-      form.reset();
-      
-      setTimeout(() => {
-        if (submitBtn) {
-          submitBtn.innerHTML = origText;
-          submitBtn.disabled = false;
+    const fields = Object.fromEntries(new FormData(form).entries());
+    const payload = {
+      name: fields.name,
+      email: fields.email,
+      company: fields.company || "",
+      projectType: fields.service || fields.project_type || "Bespoke Business Website",
+      budget: fields.budget || "Flexible",
+      timeline: fields.timeline || "Flexible",
+      message: fields.details || fields.message || "",
+      source
+    };
+
+    fetch(`${API_BASE}/api/inquiries`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then((res) =>
+        res
+          .json()
+          .catch(() => ({}))
+          .then((body) => ({ ok: res.ok, body }))
+      )
+      .then(({ ok, body }) => {
+        if (!ok || !body.success) {
+          throw new Error(body.error || "The server rejected the submission.");
         }
-      }, 3500);
-    }, 600);
+        if (status) {
+          status.innerHTML = "✓ " + (body.message || "Project brief received successfully!");
+          status.classList.remove("error");
+          status.classList.add("active");
+        }
+        if (submitBtn) submitBtn.innerHTML = "Brief Sent ✓";
+        showToast("Project request sent successfully!");
+        form.reset();
+      })
+      .catch(() => {
+        if (status) {
+          status.innerHTML =
+            "✕ Couldn't reach the server. Please try again, or message me directly on WhatsApp/email.";
+          status.classList.add("active", "error");
+        }
+        if (submitBtn) submitBtn.innerHTML = "Retry Submission";
+        showToast("Couldn't send — please try WhatsApp or email.");
+      })
+      .finally(() => {
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.innerHTML = origText;
+            submitBtn.disabled = false;
+          }
+        }, 5000);
+      });
   });
 }
 
-setupForm("directContactForm", "contactStatus");
-setupForm("modalBookingForm", "modalStatus");
+setupForm("directContactForm", "contactStatus", "contact_form");
+setupForm("modalBookingForm", "modalStatus", "booking_modal");

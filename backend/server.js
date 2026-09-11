@@ -79,8 +79,18 @@ app.post("/api/inquiries", async (req, res) => {
 
 // Admin Route: Get all inquiries (Protected by simple API Secret Key)
 app.get("/api/inquiries", async (req, res) => {
+  const configuredKey = process.env.ADMIN_SECRET_KEY;
+  if (!configuredKey) {
+    // Refuse to serve this route rather than falling back to a hardcoded
+    // secret that's sitting in the public .env.example / this source file.
+    console.error("[Admin Route] Blocked: ADMIN_SECRET_KEY is not set in the environment.");
+    return res.status(500).json({
+      error: "Admin endpoint is disabled. Set ADMIN_SECRET_KEY in your environment to enable it."
+    });
+  }
+
   const adminKey = req.headers["x-admin-key"];
-  if (adminKey !== (process.env.ADMIN_SECRET_KEY || "vexor_admin_secret_2026")) {
+  if (adminKey !== configuredKey) {
     return res.status(401).json({ error: "Unauthorized access" });
   }
 

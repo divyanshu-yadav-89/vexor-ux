@@ -1252,6 +1252,18 @@ textarea {
   display: block;
 }
 
+.form-status.error {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #f87171;
+}
+
+/* Mobile-only CTA link injected into the nav dropdown so "Start a Project"
+   stays reachable once .nav-actions is hidden below 860px (see media query) */
+.nav-link.mobile-only {
+  display: none;
+}
+
 /* FINAL CTA BANNER */
 .cta-banner {
   padding: 68px 56px;
@@ -1652,6 +1664,14 @@ footer {
     width: 100%;
     text-align: center;
     padding: 10px 16px;
+  }
+
+  .nav-link.mobile-only {
+    display: block;
+    color: #fff;
+    background: rgba(124, 102, 255, 0.16);
+    border: 1px solid rgba(124, 102, 255, 0.3);
+    margin-top: 4px;
   }
 
   .nav-menu.mobile-open {

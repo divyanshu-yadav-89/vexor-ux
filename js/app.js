@@ -52,7 +52,7 @@ window.addEventListener("scroll", () => {
 
   navLinks.forEach(link => {
     link.classList.remove("active");
-    if (link.getAttribute("href") === `#${currentSection}`) {
+    if (currentSection && link.getAttribute("href") === `#${currentSection}`) {
       link.classList.add("active");
     }
   });
@@ -149,6 +149,24 @@ updateEstimator();
 const cmdPalette = document.getElementById("cmdPalette");
 const cmdInput = document.getElementById("cmdInput");
 const cmdList = document.getElementById("cmdList");
+let activeCmdIndex = 0;
+
+function getVisibleCmdItems() {
+  if (!cmdList) return [];
+  return Array.from(cmdList.querySelectorAll(".cmd-item")).filter(
+    (item) => item.style.display !== "none"
+  );
+}
+
+function updateActiveCmdItem() {
+  const visibleItems = getVisibleCmdItems();
+  visibleItems.forEach((item, idx) => {
+    item.classList.toggle("active", idx === activeCmdIndex);
+    if (idx === activeCmdIndex) {
+      item.scrollIntoView({ block: "nearest" });
+    }
+  });
+}
 
 function openCmdPalette() {
   if (!cmdPalette || !cmdInput) return;
@@ -156,6 +174,8 @@ function openCmdPalette() {
   document.body.style.overflow = "hidden";
   cmdInput.value = "";
   filterCmdList("");
+  activeCmdIndex = 0;
+  updateActiveCmdItem();
   setTimeout(() => cmdInput.focus(), 80);
 }
 
@@ -177,6 +197,8 @@ function filterCmdList(query) {
   cmdList.querySelectorAll(".cmd-item").forEach(item => {
     item.style.display = item.textContent.toLowerCase().includes(q) ? "flex" : "none";
   });
+  activeCmdIndex = 0;
+  updateActiveCmdItem();
 }
 
 if (cmdInput) {
@@ -184,14 +206,42 @@ if (cmdInput) {
 }
 
 document.addEventListener("keydown", (e) => {
+  const isCmdOpen = cmdPalette && cmdPalette.classList.contains("open");
+
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
     e.preventDefault();
     if (cmdPalette) {
-      cmdPalette.classList.contains("open") ? closeCmdPalette() : openCmdPalette();
+      isCmdOpen ? closeCmdPalette() : openCmdPalette();
     }
+    return;
   }
+
+  if (isCmdOpen) {
+    const visibleItems = getVisibleCmdItems();
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (visibleItems.length > 0) {
+        activeCmdIndex = (activeCmdIndex + 1) % visibleItems.length;
+        updateActiveCmdItem();
+      }
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (visibleItems.length > 0) {
+        activeCmdIndex = (activeCmdIndex - 1 + visibleItems.length) % visibleItems.length;
+        updateActiveCmdItem();
+      }
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (visibleItems.length > 0 && visibleItems[activeCmdIndex]) {
+        visibleItems[activeCmdIndex].click();
+      }
+    } else if (e.key === "Escape") {
+      closeCmdPalette();
+    }
+    return;
+  }
+
   if (e.key === "Escape") {
-    if (cmdPalette && cmdPalette.classList.contains("open")) closeCmdPalette();
     if (modalBackdrop && modalBackdrop.classList.contains("open")) closeBookingModal();
   }
 });
@@ -225,7 +275,7 @@ if (modalBackdrop) {
   });
 }
 
-// 8. Unified Form Handling (Direct & Modal) — submits real data to the backend
+// 8. Unified Form Handling (Direct & Modal) — submits real data to the backend with offline/fallback support
 const API_BASE = (window.VEXOR_API_BASE || "").replace(/\/$/, "");
 
 function setupForm(formId, statusId, source) {
@@ -255,6 +305,50 @@ function setupForm(formId, statusId, source) {
       source
     };
 
+    const waText = encodeURIComponent(
+      `Hi Divyanshu! I submitted a project brief on VexorUX:\n\n` +
+      `• Name: ${payload.name}\n` +
+      `• Email: ${payload.email}\n` +
+      `• Company: ${payload.company || "N/A"}\n` +
+      `• Category: ${payload.projectType}\n` +
+      `• Budget: ${payload.budget}\n` +
+      `• Timeline: ${payload.timeline}\n` +
+      `• Brief: ${payload.message}`
+    );
+
+    const emailSubject = encodeURIComponent(`[Project Brief] ${payload.projectType} — ${payload.name}`);
+    const emailBody = encodeURIComponent(
+      `Name: ${payload.name}\n` +
+      `Email: ${payload.email}\n` +
+      `Company: ${payload.company || "N/A"}\n` +
+      `Category: ${payload.projectType}\n` +
+      `Budget: ${payload.budget}\n` +
+      `Timeline: ${payload.timeline}\n\n` +
+      `Project Brief:\n${payload.message}`
+    );
+
+    const fallbackHtml =
+      `<div style="margin-bottom: 8px;">✕ Server unreachable. Send your brief directly:</div>` +
+      `<div class="form-fallback-actions">` +
+      `<a href="https://wa.me/917222977455?text=${waText}" target="_blank" rel="noopener" class="form-fallback-btn form-fallback-wa">Send via WhatsApp ↗</a>` +
+      `<a href="mailto:hsy0561@gmail.com?subject=${emailSubject}&body=${emailBody}" class="form-fallback-btn form-fallback-email">Send via Email ↗</a>` +
+      `</div>`;
+
+    // If no backend configured or static production without endpoint, trigger immediate action
+    if (!API_BASE) {
+      if (status) {
+        status.innerHTML = fallbackHtml;
+        status.classList.remove("error");
+        status.classList.add("active");
+      }
+      showToast("Choose WhatsApp or Email to send!");
+      if (submitBtn) {
+        submitBtn.innerHTML = origText;
+        submitBtn.disabled = false;
+      }
+      return;
+    }
+
     fetch(`${API_BASE}/api/inquiries`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -281,8 +375,7 @@ function setupForm(formId, statusId, source) {
       })
       .catch(() => {
         if (status) {
-          status.innerHTML =
-            "✕ Couldn't reach the server. Please try again, or message me directly on WhatsApp/email.";
+          status.innerHTML = fallbackHtml;
           status.classList.add("active", "error");
         }
         if (submitBtn) submitBtn.innerHTML = "Retry Submission";

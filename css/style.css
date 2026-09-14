@@ -954,6 +954,28 @@ nav.scrolled {
   gap: 6px;
 }
 
+.work-action-row {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.work-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  color: var(--secondary);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.work-link:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
 /* PROCESS TIMELINE */
 .process-container {
   display: grid;
@@ -1258,6 +1280,56 @@ textarea {
   color: #f87171;
 }
 
+.form-privacy-note {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+.form-fallback-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.form-fallback-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
+}
+
+.form-fallback-wa {
+  background: rgba(37, 211, 102, 0.15);
+  border-color: rgba(37, 211, 102, 0.4);
+  color: #25d366;
+}
+.form-fallback-wa:hover {
+  background: rgba(37, 211, 102, 0.25);
+  color: #fff;
+}
+
+.form-fallback-email {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
+}
+.form-fallback-email:hover {
+  background: rgba(56, 189, 248, 0.25);
+  color: #fff;
+}
+
 /* Mobile-only CTA link injected into the nav dropdown so "Start a Project"
    stays reachable once .nav-actions is hidden below 860px (see media query) */
 .nav-link.mobile-only {
@@ -1434,9 +1506,15 @@ footer {
   transition: all 0.15s ease;
 }
 
-.cmd-item:hover {
-  background: rgba(139, 124, 255, 0.12);
+.cmd-item:hover,
+.cmd-item.active {
+  background: rgba(139, 124, 255, 0.18);
   color: #fff;
+  outline: 1px solid rgba(139, 124, 255, 0.45);
+}
+
+.cmd-item.active .cmd-item-tag {
+  color: var(--secondary);
 }
 
 .cmd-item-left {

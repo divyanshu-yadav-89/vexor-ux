@@ -3,11 +3,14 @@
 > **Digital Products & Creative Engineering**  
 > High-performance web applications, bespoke digital experiences, and interactive 3D interfaces engineered for growth and clarity. Built and maintained by **Divyanshu Yadav**.
 
+🌐 **Live Website:** [https://divyanshu-yadav-89.github.io/vexor-ux/](https://divyanshu-yadav-89.github.io/vexor-ux/)  
+📊 **Interactive Presentation Deck:** [https://divyanshu-yadav-89.github.io/vexor-ux/presentation.html](https://divyanshu-yadav-89.github.io/vexor-ux/presentation.html)
+
 ---
 
 ## 🌟 Overview
 
-**VexorUX** is a modern, high-converting digital agency and creative engineering platform. It pairs sleek, responsive design with interactive 3D WebGL visuals, real-time cost estimation, an integrated command palette (`⌘K`), and an Express/MongoDB backend to handle inquiries and client briefs.
+**VexorUX** is a modern, high-converting digital agency and creative engineering platform. It pairs sleek, responsive design with interactive 3D WebGL visuals, real-time cost estimation, an integrated command palette (`⌘K`), an interactive 7-slide pitch deck, and an Express/MongoDB backend to handle inquiries and client briefs.
 
 ---
 
@@ -15,9 +18,10 @@
 
 ### 🎨 Frontend & Experience
 * **Interactive 3D Visuals (Three.js):** Custom WebGL canvas featuring interactive wireframe meshes, particle effects, smooth rotation, and dynamic mouse tracking with performance mode support.
+* **Interactive Presentation Deck (`presentation.html`):** Built-in 7-slide showcase deck with keyboard arrow navigation, speaker notes, and fullscreen mode.
 * **Cost Calculator / Project Estimator:** Live pricing estimator allowing potential clients to calculate estimates based on scope, feature sets, and design complexity.
-* **Quick Actions Command Palette (`Ctrl+K` / `⌘K`):** Keyboard-accessible quick navigation dialog for fast actions across sections.
-* **Project Booking & Inquiry Modal:** Seamless onboarding modal to collect detailed scope briefs with instant backend synchronization.
+* **Quick Actions Command Palette (`Ctrl+K` / `⌘K`):** Keyboard-accessible quick navigation dialog with arrow-key navigation (`[↑] [↓] [↵]`) for fast actions across sections.
+* **Project Booking & Inquiry Modal:** Seamless onboarding modal to collect detailed scope briefs with instant backend synchronization and offline WhatsApp/Email fallbacks.
 * **Modern Responsive UI:** Glassmorphic navigation, sticky scroll indicators, interactive FAQs, and mobile drawer navigation.
 
 ### ⚙️ Backend & API
@@ -46,10 +50,14 @@
 ```text
 VEXOR.UX/
 ├── index.html              # Main landing page & application UI
+├── presentation.html       # 7-Slide Interactive Presentation Deck
+├── favicon.svg             # Brand vector SVG favicon
+├── sitemap.xml             # Search engine sitemap
+├── robots.txt              # Web crawler configuration
 ├── css/
 │   └── style.css           # Design system, themes, and responsive styles
 ├── js/
-│   ├── app.js              # Application logic, calculator, modals & API bindings
+│   ├── app.js              # Application logic, calculator, command palette & forms
 │   └── threeScene.js       # Three.js 3D background animation & controls
 ├── backend/
 │   ├── models/

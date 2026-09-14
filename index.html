@@ -75,7 +75,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- External Modular Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2.1">
 
   <!-- Three.js CDN Library (SRI-pinned so a compromised CDN can't inject arbitrary script) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -100,10 +100,12 @@
         <li><a href="#process" class="nav-link">Process</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="presentation.html" target="_blank" rel="noopener" class="nav-link" style="color: var(--secondary); font-weight: 600;">Deck ↗</a></li>
         <li><a href="#" class="nav-link mobile-only" onclick="openBookingModal(); return false;">Start a Project →</a></li>
       </ul>
 
       <div class="nav-actions">
+        <a href="presentation.html" target="_blank" rel="noopener" class="btn btn-secondary nav-cta-btn" style="padding: 10px 14px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;" title="Open Project Presentation Deck">Deck ↗</a>
         <button class="cmd-badge-btn" onclick="openCmdPalette()" title="Press Ctrl+K">⌘K Quick Actions</button>
         <button class="btn btn-primary nav-cta-btn" onclick="openBookingModal()">Start a Project</button>
       </div>
@@ -804,7 +806,7 @@
             <a href="#process">Process</a>
             <a href="#about">About</a>
             <a href="#faq">FAQ</a>
-            <a href="presentation.html" target="_blank" rel="noopener">Presentation Deck ↗</a>
+            <a href="presentation.html" target="_blank" rel="noopener" style="color: var(--secondary); font-weight: 600;">Presentation Deck ↗</a>
           </div>
           <div class="footer-nav-col">
             <span class="footer-nav-title">Connect</span>
@@ -1002,6 +1004,6 @@
 
   <!-- MODULAR JAVASCRIPT FILES (CONNECTED EXTERNALLY) -->
   <script src="js/threeScene.js" defer></script>
-  <script src="js/app.js" defer></script>
+  <script src="js/app.js?v=2.1" defer></script>
 </body>
 </html>
